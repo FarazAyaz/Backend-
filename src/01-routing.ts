@@ -1,13 +1,11 @@
-import http, { IncomingMessage, ServerResponse } from "node:http";
-const express = require("express");
+import express, { Request, Response } from "express";
+
 const app = express();
-app.get("/", (req: IncomingMessage, res: ServerResponse) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Hello World\n");
+
+app.get("/", (req: Request, res: Response) => {
+  res.send(`Hello ${req.query.name || "World"}!`);
 });
+
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
-
-
-
